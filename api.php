@@ -5,7 +5,7 @@
     $clientId = 'rrgh6zsu4jmubowaczix3te2a51tmq';
 
     if (!isset($_GET['code'])) {
-        header('Location: https://quiet-falls-57041.herokuapp.com');
+        header('Location: http://localhost:8888');
     }else{
         try {            
             $original_json_array = json_decode(file_get_contents('./_access.txt'), true); 

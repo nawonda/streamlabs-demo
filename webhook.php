@@ -28,12 +28,12 @@ function waitForTwitch(){
 
     //Exec curl_handle, receive a JSON decoded result on success, FALSE otherwise.
     $jsonUserObj = curl_exec($curl_handle);
-    file_put_contents('webhook_log_1.txt', $r, FILE_APPEND);
+    file_put_contents('webhook_log_1.txt', $jsonUserObj, FILE_APPEND);
     //Successfully received a response.
     if($jsonUserObj !== FALSE){
         //JSON decode $result.
         $subscription_data = json_decode($jsonUserObj);
-        file_put_contents('webhook_log_1.txt', $r, FILE_APPEND);
+        file_put_contents('webhook_log_1.txt', $subscription_data, FILE_APPEND);
     }
 }
 

@@ -131,7 +131,7 @@
 
         $data = array(
         'hub.mode' => $mode,
-        'hub.topic' => "https://api.twitch.tv/helix/users/follows?first=10&to_id=".$target_user_id,
+        'hub.topic' => "https://api.twitch.tv/helix/users/follows?first=1&to_id=".$target_user_id,
         'hub.callback' => $callback_url,
         'hub.lease_seconds' => $lease_seconds
         );

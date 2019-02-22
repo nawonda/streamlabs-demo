@@ -12,10 +12,14 @@ if(isset($_GET['hub_challenge']) && !empty($_GET['hub_challenge'])){
     //Subscription Verify Response
     //HzSGH_h04Cgl6VbDJm7IyXSNSlrhaLvBi9eft3bw
     echo $r;
-    file_put_contents('webhook_log.txt', $r);
-    waitForTwitch();
+    file_put_contents('webhook_log.txt', $r, FILE_APPEND);
 }
 
+if(isset($_POST['data'])){
+    $r = $_POST['data'];
+    file_put_contents('webhook_log.txt', "get a call", FILE_APPEND);
+    file_put_contents('webhook_log.txt', $r, FILE_APPEND);
+}
 
 function waitForTwitch(){
     $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 

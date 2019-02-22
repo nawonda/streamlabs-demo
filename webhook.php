@@ -25,18 +25,18 @@ function waitForTwitch(){
     $clientSecret = $data['clientSecret'];
     $port = $data['port'];
 
-    $curl_handle=curl_init();
-    //Define GET request header.
-    $content_header = array('Authorization: Bearer ' . $bearer);
-    curl_setopt_array($curl_handle, array(
-    CURLOPT_RETURNTRANSFER => TRUE,
-    CURLOPT_URL => 'https://api.twitch.tv/helix/webhooks/subscriptions?first=10',
-    CURLOPT_HTTPHEADER => $content_header,
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch, CURLOPT_URL, 'https://api.twitch.tv/helix/webhooks/subscriptions?first=10');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($data_string),
     'Client-ID: '.$clientId
     ));
 
-    //Exec curl_handle, receive a JSON decoded result on success, FALSE otherwise.
-    $jsonUserObj = curl_exec($curl_handle);
+    //Exec ch, receive a JSON decoded result on success, FALSE otherwise.
+    $jsonUserObj = curl_exec($ch);
     file_put_contents('webhook_log_1.txt', $jsonUserObj, FILE_APPEND);
     //Successfully received a response.
     if($jsonUserObj !== FALSE){

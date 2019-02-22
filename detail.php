@@ -30,10 +30,11 @@
             });
         
             // websocket client
-            var socket;
+            var socket;            
 
             function init(){
-                var host = "ws://127.0.0.1:1222";
+                var x = window.location.hostname;
+                var host = "ws://" + x + ":1222";
                 try{
                 socket = new WebSocket(host);
                 log('WebSocket - status '+socket.readyState);

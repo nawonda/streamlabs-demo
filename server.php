@@ -1,6 +1,9 @@
 <?php
     //A very very simple websocket server 
-    $address = '127.0.0.1';
+    $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
+    $url = $original_json_array["enabled"];
+
+    $address = $url;
     $port = '1222';
     
     // Create WebSocket.

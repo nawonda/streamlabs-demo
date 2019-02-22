@@ -3,9 +3,11 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $clientId = 'rrgh6zsu4jmubowaczix3te2a51tmq';
+    $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
+    $url = $original_json_array["enabled"];
 
     if (!isset($_GET['code'])) {
-        header('Location: http://localhost:8888');
+        header('Location: '.$url.":8888");
     }else{
         try {            
             $original_json_array = json_decode(file_get_contents('./_access.txt'), true); 

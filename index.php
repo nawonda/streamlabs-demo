@@ -24,13 +24,13 @@
 <body id="page-top">
 
 <?php    
-    require 'twitch.php';
+    require './twitch.php';
     $clientId = 'rrgh6zsu4jmubowaczix3te2a51tmq';
 
     $provider = new TwitchProvider([
         'clientId'                => $clientId,     // The client ID assigned when you created your application
         'clientSecret'            => 'c8cp3njxl8t55wcdvdld15gjcep02x', // The client secret assigned when you created your application
-        'redirectUri'             => 'http://localhost:8888',  // Your redirect URL you specified when you created your application
+        'redirectUri'             => 'https://quiet-falls-57041.herokuapp.com',  // Your redirect URL you specified when you created your application
         "scopes" => [
             "channel_commercial",
             "channel_editor",
@@ -39,8 +39,11 @@
             "user_follows_edit"
         ],
     ]);
+    echo "1111";
     // If we don't have an authorization code then get one
     if (!isset($_GET['code'])) {
+
+        echo "22222";
         // Fetch the authorization URL from the provider, and store state in session
         $authorizationUrl = $provider->getAuthorizationUrl();
         $_SESSION['oauth2state'] = $provider->getState();
@@ -65,6 +68,7 @@
         }
         exit('Invalid state');
     } else {
+        echo "33333";
         try {
             
             // Get an access token using authorization code grant.

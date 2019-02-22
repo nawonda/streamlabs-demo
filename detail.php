@@ -78,7 +78,7 @@
 
         $mode = "subscribe";
         $callback_url = $url.$port."/webhook.php";
-        $target_user_id = "417689348";
+        $target_user_id = $_GET['userId'];
         $lease_days = "10";
         $lease_seconds = $lease_days * 24 * 60 * 60;
 

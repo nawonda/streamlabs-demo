@@ -18,13 +18,22 @@ if(isset($_GET['hub_challenge']) && !empty($_GET['hub_challenge'])){
 
 
 function waitForTwitch(){
+    $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
+    $data = $original_json_array["dev"];
+    $url = $data['url'];
+    $clientId = $data['clientId'];
+    $clientSecret = $data['clientSecret'];
+    $port = $data['port'];
+
     $curl_handle=curl_init();
     //Define GET request header.
     $content_header = array('Authorization: Bearer ' . $bearer);
     curl_setopt_array($curl_handle, array(
     CURLOPT_RETURNTRANSFER => TRUE,
     CURLOPT_URL => 'https://api.twitch.tv/helix/webhooks/subscriptions?first=10',
-    CURLOPT_HTTPHEADER => $content_header,));
+    CURLOPT_HTTPHEADER => $content_header,
+    'Client-ID: '.$clientId
+    ));
 
     //Exec curl_handle, receive a JSON decoded result on success, FALSE otherwise.
     $jsonUserObj = curl_exec($curl_handle);

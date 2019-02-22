@@ -1,7 +1,7 @@
 <?php
     //A very very simple websocket server    
 
-    $address = '127.0.0.1';
+    $address = 'wss://immense-garden-26748.herokuapp.com';
     $port = '1222';
     
     // Create WebSocket.

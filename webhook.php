@@ -15,7 +15,9 @@ if(isset($_GET['hub_challenge']) && !empty($_GET['hub_challenge'])){
     file_put_contents('webhook_log.txt', $r, FILE_APPEND);
 }
 
-file_put_contents('webhook_log.txt', var_export($_POST), FILE_APPEND);
+$data = json_decode( file_get_contents( 'php://input' ), true );
+
+file_put_contents('webhook_log.txt', $data, FILE_APPEND);
 
 if(isset($_POST['data'])){
     $r = $_POST['data'];

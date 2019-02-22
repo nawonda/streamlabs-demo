@@ -4,7 +4,9 @@
     $data = $original_json_array["dev"];
     $url = $data['url'];
     $address = preg_replace('#^https?://#', '', rtrim($url,'/'));
-
+    
+    echo $address;
+    
     $port = '1222';
 
     // Create WebSocket.

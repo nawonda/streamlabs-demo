@@ -1,11 +1,12 @@
 <?php
     //A very very simple websocket server 
-    $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
-    $url = $original_json_array["enabled"];
+    $original_json_array = json_decode(file_get_contents('./_config.txt'), true);     
+    $data = $original_json_array["dev"];
+    $url = $data['url'];
+    $address = preg_replace('#^https?://#', '', rtrim($url,'/'));
 
-    $address = $url;
     $port = '1222';
-    
+
     // Create WebSocket.
     $server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
     socket_set_option($server, SOL_SOCKET, SO_REUSEADDR, 1);

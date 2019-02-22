@@ -33,8 +33,16 @@
             var socket;            
 
             function init(){
-                var x = window.location.hostname;
-                var host = "ws://" + x + ":1222";
+                // var x = window.location.hostname;
+                var loc = window.location;
+                if (loc.protocol === "https:") {
+                    new_uri = "wss:";
+                } else {
+                    new_uri = "ws:";
+                }
+                new_uri += "//" + loc.hostname;
+                var host = new_uri + ":1222";
+                console.log(host);
                 try{
                 socket = new WebSocket(host);
                 log('WebSocket - status '+socket.readyState);
@@ -55,45 +63,51 @@
     </body>
 </html>
 
-<?php
+<?php        
     webhook();
-    
+
     function webhook(){
-        echo "hook with twitch server";
-        $client_id = "rrgh6zsu4jmubowaczix3te2a51tmq";
+        echo "webhook accepted state code = ";
+        
+        $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
+        $data = $original_json_array["dev"];
+        $url = $data['url'];
+        $clientId = $data['clientId'];
+        $clientSecret = $data['clientSecret'];
+        $port = $data['port'];
 
-    $mode = "subscribe";
-    $callback_url = "http://localhost:8888/socket-server.php";
-    $target_user_id = "417689348";
-    $lease_days = "10";
-    $lease_seconds = $lease_days * 24 * 60 * 60;
+        $mode = "subscribe";
+        $callback_url = $url.$port."/webhook.php";
+        $target_user_id = "417689348";
+        $lease_days = "10";
+        $lease_seconds = $lease_days * 24 * 60 * 60;
 
-    $subscribe_to_event_url = "https://api.twitch.tv/helix/webhooks/hub";
+        $subscribe_to_event_url = "https://api.twitch.tv/helix/webhooks/hub";
 
-    $data = array(
-    'hub.mode' => $mode,
-    'hub.topic' => "https://api.twitch.tv/helix/streams?user_id=".$target_user_id,
-    'hub.callback' => $callback_url,
-    'hub.lease_seconds' => $lease_seconds
-    );
-    $data_string = json_encode($data);
+        $data = array(
+        'hub.mode' => $mode,
+        'hub.topic' => "https://api.twitch.tv/helix/streams?user_id=".$target_user_id,
+        'hub.callback' => $callback_url,
+        'hub.lease_seconds' => $lease_seconds
+        );
+        $data_string = json_encode($data);
 
-    $ch = curl_init($subscribe_to_event_url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json',
-    'Content-Length: ' . strlen($data_string),
-    'Client-ID: '.$client_id
-    ));
+        $ch = curl_init($subscribe_to_event_url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data_string),
+        'Client-ID: '.$clientId
+        ));
 
-    $result = curl_exec($ch);
-    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+        $result = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-    echo $httpcode."
-    ".$result;
+        echo $httpcode."
+        ".$result;
     }
 
 ?>

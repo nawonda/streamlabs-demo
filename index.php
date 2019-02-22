@@ -26,15 +26,19 @@
 <?php        
 
     require 'twitch.php';
-    $clientId = 'rrgh6zsu4jmubowaczix3te2a51tmq';
 
     $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
-    $url = $original_json_array["enabled"];
+
+    $data = $original_json_array["dev"];
+    $url = $data['url'];
+    $clientId = $data['clientId'];
+    $clientSecret = $data['clientSecret'];
+    $port = $data['port'];
 
     $provider = new TwitchProvider([
         'clientId'                => $clientId,     // The client ID assigned when you created your application
-        'clientSecret'            => 'c8cp3njxl8t55wcdvdld15gjcep02x', // The client secret assigned when you created your application
-        'redirectUri'             => $url.":8888",  // Your redirect URL you specified when you created your application
+        'clientSecret'            => $clientSecret, // The client secret assigned when you created your application
+        'redirectUri'             => $url.$port,  // Your redirect URL you specified when you created your application
         "scopes" => [
             "channel_commercial",
             "channel_editor",

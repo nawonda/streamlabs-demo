@@ -2,12 +2,16 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    $clientId = 'rrgh6zsu4jmubowaczix3te2a51tmq';
+
     $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
-    $url = $original_json_array["enabled"];
+    $data = $original_json_array["dev"];
+    $url = $data['url'];
+    $clientId = $data['clientId'];
+    $clientSecret = $data['clientSecret'];
+    $port = $data['port'];
 
     if (!isset($_GET['code'])) {
-        header('Location: '.$url.":8888");
+        header('Location: '.$url.$port);
     }else{
         try {            
             $original_json_array = json_decode(file_get_contents('./_access.txt'), true); 

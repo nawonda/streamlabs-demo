@@ -1,4 +1,14 @@
 {
-    "disabled":"127.0.0.1", 
-    "enabled":"https://immense-garden-26748.herokuapp.com/"
+    "dev":{
+        "url":"http://localhost",
+        "port":":8888",
+        "clientId":"rrgh6zsu4jmubowaczix3te2a51tmq",
+        "clientSecret":"c8cp3njxl8t55wcdvdld15gjcep02x"
+    }, 
+    "production":{
+        "url":"https://immense-garden-26748.herokuapp.com",
+        "port":"",
+        "clientId":"qw63bzjy7pkvp3ehwtu27jlvbf3547",
+        "clientSecret":"h3bk9ujdh0jxbrpewlt5000r7to607"
+    }
 }

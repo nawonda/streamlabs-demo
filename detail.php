@@ -65,6 +65,7 @@
 
 <?php        
     webhook();
+    webhook_follows();
 
     function webhook(){
         echo "webhook accepted state code = ";
@@ -110,4 +111,47 @@
         ".$result;
     }
 
+    function webhook_follows(){
+        echo "follows webhook accepted state code = ";
+        
+        $original_json_array = json_decode(file_get_contents('./_config.txt'), true); 
+        $data = $original_json_array["dev"];
+        $url = $data['url'];
+        $clientId = $data['clientId'];
+        $clientSecret = $data['clientSecret'];
+        $port = $data['port'];
+
+        $mode = "subscribe";
+        $callback_url = $url.$port."/webhook.php";
+        $target_user_id = $_GET['userId'];
+        $lease_days = "10";
+        $lease_seconds = $lease_days * 24 * 60 * 60;
+
+        $subscribe_to_event_url = "https://api.twitch.tv/helix/webhooks/hub";
+
+        $data = array(
+        'hub.mode' => $mode,
+        'hub.topic' => "https://api.twitch.tv/helix/users/follows?first=10&to_id=".$target_user_id,
+        'hub.callback' => $callback_url,
+        'hub.lease_seconds' => $lease_seconds
+        );
+        $data_string = json_encode($data);
+
+        $ch = curl_init($subscribe_to_event_url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data_string),
+        'Client-ID: '.$clientId
+        ));
+
+        $result = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        echo $httpcode."
+        ".$result;
+    }
 ?>

@@ -147,7 +147,7 @@
             var display_name = streamer['channel']['display_name'];
             var user_id = streamer['_id'];
             var game = streamer['game'];
-            var streamer_info = "<div> User ID = " + user_id + " | Channel ID = <a href='./detail.php?display_name=" + display_name + "'>" + display_name + "&userId=" + user_id + "</a> | Game = " + game + "</div>";            
+            var streamer_info = "<div> User ID = " + user_id + " | Channel ID = <a href='./detail.php?display_name=" + display_name + "&userId=" + user_id + "'>" + display_name  + "</a> | Game = " + game + "</div>";            
             $( ".temp1" ).append(streamer_info);            
         });
 

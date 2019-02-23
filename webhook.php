@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     foreach ($_GET as $key => $value) {
         
-        $printString = $printString  . "Key: " . $key . " Val: " . $value . "\n";
+        $printString = $printString  . "Key: " . $key . " Val: " . trim($value) . "\n";
     }
     
-    file_put_contents("webhook_log.txt", $printString,FILE_APPEND);
+    file_put_contents("webhook_log.txt", $printString);
     
     if (isset($_GET['hub_challenge'])) {
         $challenge = $_GET['hub_challenge'];
-        echo $challenge;
-        file_put_contents("webhook_log.txt", "<<<return = ".$challenge.">>>\n", FILE_APPEND);
+        echo trim($challenge);
+        file_put_contents("webhook_log.txt", "<<<return = ".$trim($challenge).">>>\n", FILE_APPEND);
     }
 }
 

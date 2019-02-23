@@ -40,6 +40,7 @@
     while (true) {
         sleep(1);
         $content = 'Now: ' . time();
+        $content .= file_get_contents('webhook_log.txt');
         $response = chr(129) . chr(strlen($content)) . $content;
         socket_write($client, $response);
     }

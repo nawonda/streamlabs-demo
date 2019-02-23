@@ -21,11 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $printString = $printString  . "Key: " . $key . " Val: " . $value . "\n";
     }
     
-    file_put_contents("webhook_log.txt", $printString);
+    file_put_contents("webhook_log.txt", $printString,FILE_APPEND);
     
     if (isset($_GET['hub_challenge'])) {
         $challenge = $_GET['hub_challenge'];
-        echo $challenge;
+        echo "+++".$challenge."+++";
+        file_put_contents("webhook_log.txt", "+++".$challenge."+++", FILE_APPEND);
     }
 }
 
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $payload = "POST received\n";
     //$payload = file_get_contents('php://input');
-    file_put_contents("payload.txt", $payload);
+    file_put_contents("webhook_log.txt", $payload,FILE_APPEND);
 }
 
 ?>

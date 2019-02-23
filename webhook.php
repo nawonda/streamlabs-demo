@@ -11,8 +11,11 @@ if(isset($_GET['hub_challenge']) && !empty($_GET['hub_challenge'])){
     $r = $_GET['hub_challenge'];
     //Subscription Verify Response
     //HzSGH_h04Cgl6VbDJm7IyXSNSlrhaLvBi9eft3bw
-    echo $r;
+    
     file_put_contents('webhook_log.txt', "challenge=".$r."\n", FILE_APPEND);
+    echo $r;
+    exit();
+    
 }
 
 $body = file_get_contents('php://input');

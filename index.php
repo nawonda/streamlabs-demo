@@ -82,27 +82,58 @@
 
             // Using the access token, get user profile
             $resourceOwner = $provider->getResourceOwner($accessToken);
-            $user = $resourceOwner->toArray()['data'][0];
+            $user = $resourceOwner->toArray()['data'][0];            
             
-            echo '<table>';
-            echo '<tr><th>Access Token</th><td>' . htmlspecialchars($accessToken->getToken()) . '</td></tr>';
-            echo '<tr><th>Refresh Token</th><td>' . htmlspecialchars($accessToken->getRefreshToken()) . '</td></tr>';
-            echo '<tr><th>Username</th><td>' . htmlspecialchars($user['display_name']) . '</td></tr>';
-            echo '<tr><th>ID</th><td>' . htmlspecialchars($user['id']) . '</td></tr>';
-            echo '<tr><th>Bio</th><td>' . htmlspecialchars($user['description']) . '</td></tr>';
-            echo '<tr><th>Image</th><td><img src="' . htmlspecialchars($user['profile_image_url']) . '"></td></tr>';
-            echo '<tr>
-                    <th>
-                        <div class="input-group">
-                            <input class="form-control channelId" type="text" placeholder="Enter Channel ID">
-                            <span class="input-group-btn">
-                                <button type="submit" class="add-streamer-button btn btn-primary mb-2">ADD</button>
-                            </span>
-                        </div>
-                    </td>
-                </tr>';
-            echo '</table>';
-            echo '<div class="temp1"></div>';
+            echo '
+            <div class="container">
+                <div class="panel panel-info" style="margin-top:30px">
+                <div class="panel-heading">
+                <h3 class="panel-title">'. htmlspecialchars($user['display_name']) .'</h3>
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="' . htmlspecialchars($user['profile_image_url']) . '" class="img-circle img-responsive"> </div>
+                
+                    <div class=" col-md-6 col-lg-6 " style="margin-left:40px"> 
+                        <tr>
+                            <th>
+                                <div class="input-group">
+                                    <input class="form-control channelId" type="text" placeholder="Enter Channel ID">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="add-streamer-button btn btn-primary mb-2">ADD</button>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>Access Token:</td>
+                                <td>' . htmlspecialchars($accessToken->getToken()) . '</td>
+                            </tr>
+                            <tr>
+                                <td>Refresh Token:</td>
+                                <td>' . htmlspecialchars($accessToken->getRefreshToken()) . '</td>
+                            </tr>
+                            <tr>
+                                <td>User ID</td>
+                                <td>' . htmlspecialchars($user['id']) . '</td>
+                            </tr>                   
+                            <tr>
+                                <td>Bio</td>
+                                <td>' . htmlspecialchars($user['description']) . '</td>
+                            </tr>
+                            </tbody>
+                        </table>                                        
+                    </div>
+                </div>
+                </div>                
+            </div>
+            <div class="temp1"></div>
+            </div>
+            ';
+          echo '';
+            
             
             //a hacky way to store access token
             $original_json_array = json_decode(file_get_contents('./_access.txt'), true); 
@@ -147,7 +178,7 @@
             var display_name = streamer['channel']['display_name'];
             var user_id = streamer['_id'];
             var game = streamer['game'];
-            var streamer_info = "<div> User ID = " + user_id + " | Channel ID = <a href='./detail.php?display_name=" + display_name + "&userId=" + user_id + "'>" + display_name  + "</a> | Game = " + game + "</div>";            
+            var streamer_info = "<div style='margin-top:20px'> User ID = " + user_id + " | Channel ID = <a href='./detail.php?display_name=" + display_name + "&userId=" + user_id + "'>" + display_name  + "</a> | Game = " + game + "</div>";            
             $( ".temp1" ).append(streamer_info);            
         });
 
@@ -157,7 +188,8 @@
 
    
 
-</script>    
+</script>  
+</div>  
 </body>
 
 </html>

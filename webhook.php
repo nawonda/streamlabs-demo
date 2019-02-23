@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     if (isset($_GET['hub_challenge'])) {
         $challenge = $_GET['hub_challenge'];
-        echo "+++".$challenge."+++";
-        file_put_contents("webhook_log.txt", "+++".$challenge."+++", FILE_APPEND);
+        echo $challenge;
+        file_put_contents("webhook_log.txt", "<<<return = ".$challenge.">>>\n", FILE_APPEND);
     }
 }
 

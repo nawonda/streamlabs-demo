@@ -34,15 +34,18 @@
 
             function init(){
                 // var x = window.location.hostname;
-                var loc = window.location;
-                if (loc.protocol === "https:") {
-                    new_uri = "wss:";
-                } else {
-                    new_uri = "ws:";
-                }
-                new_uri += "//" + loc.hostname;
-                var host = new_uri + ":1222";
-                console.log(host);
+                // var loc = window.location;
+                // if (loc.protocol === "https:") {
+                //     new_uri = "wss:";
+                // } else {
+                //     new_uri = "ws:";
+                // }
+                // // new_uri += "//" + loc.hostname;
+                // // var host = new_uri + ":1222";
+                // // console.log(host);
+
+                var host = "ws//peaceful-retreat-23083.herokuapp.com";
+
                 try{
                 socket = new WebSocket(host);
                 log('WebSocket - status '+socket.readyState);

@@ -44,7 +44,7 @@
                 // // var host = new_uri + ":1222";
                 // // console.log(host);
 
-                var host = "ws://peaceful-retreat-23083.herokuapp.com";
+                var host = "wss://peaceful-retreat-23083.herokuapp.com";
 
                 try{
                 socket = new WebSocket(host);

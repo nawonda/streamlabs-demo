@@ -80,8 +80,7 @@
         $mode = "subscribe";
         $callback_url = $url.$port."/webhook.php";
         $target_user_id = $_GET['userId'];
-        $lease_days = "10";
-        $lease_seconds = $lease_days * 24 * 60 * 60;
+        $lease_seconds = "864000";
 
         $subscribe_to_event_url = "https://api.twitch.tv/helix/webhooks/hub";
 
@@ -124,8 +123,7 @@
         $mode = "subscribe";
         $callback_url = $url.$port."/webhook.php";
         $target_user_id = $_GET['userId'];
-        $lease_days = "10";
-        $lease_seconds = $lease_days * 24 * 60 * 60;
+        $lease_seconds = "864000";
 
         $subscribe_to_event_url = "https://api.twitch.tv/helix/webhooks/hub";
 

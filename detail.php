@@ -120,6 +120,6 @@
         curl_close($ch);
 
         echo $httpcode."
-        ".$result;
+        ".$result."</br>";
     }   
 ?>

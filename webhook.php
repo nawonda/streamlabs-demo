@@ -21,12 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $printString = $printString  . "Key: " . $key . " Val: " . trim($value) . "\n";
     }
     
-    file_put_contents("webhook_log.txt", $printString);
+    file_put_contents("webhook_log.txt", $printString, FILE_APPEND);
     
     if (isset($_GET['hub_challenge'])) {
         $challenge = $_GET['hub_challenge'];
         echo trim($challenge);
-        file_put_contents("webhook_log.txt", "<<<return = ".$trim($challenge).">>>\n", FILE_APPEND);
+        file_put_contents("webhook_log.txt", "<<<return = ".trim($challenge).">>>\n", FILE_APPEND);
     }
 }
 

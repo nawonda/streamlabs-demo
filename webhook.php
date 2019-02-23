@@ -7,28 +7,33 @@ hub.topic=https://api.twitch.tv/helix/users/follows?first=1&to_id=1337& \
 hub.lease_seconds=864000& \
 hub.challenge=HzSGH_h04Cgl6VbDJm7IyXSNSlrhaLvBi9eft3bw
 */
-if(isset($_GET['hub_challenge']) && !empty($_GET['hub_challenge'])){
-    $r = $_GET['hub_challenge'];
-    //Subscription Verify Response
-    //HzSGH_h04Cgl6VbDJm7IyXSNSlrhaLvBi9eft3bw
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers:*");
+ini_set("allow_url_fopen", true);
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
-    file_put_contents('webhook_log.txt', "challenge=".$r."\n", FILE_APPEND);
-    echo $r;
-    exit();
+    $printString = "";
     
+    foreach ($_GET as $key => $value) {
+        
+        $printString = $printString  . "Key: " . $key . " Val: " . $value . "\n";
+    }
+    
+    file_put_contents("webhook_log.txt", $printString);
+    
+    if (isset($_GET['hub_challenge'])) {
+        $challenge = $_GET['hub_challenge'];
+        echo $challenge;
+    }
 }
 
-$body = file_get_contents('php://input');
 
-file_put_contents('webhook_log.txt', $body, FILE_APPEND);
-
-// if(isset($_POST['data'])){
-//     $r = $_POST['data'];
-//     file_put_contents('webhook_log.txt', "get a call", FILE_APPEND);
-//     file_put_contents('webhook_log.txt', $r, FILE_APPEND);
-    
-//     echo 200;
-// }
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $payload = "POST received\n";
+    //$payload = file_get_contents('php://input');
+    file_put_contents("payload.txt", $payload);
+}
 
 ?>

@@ -44,7 +44,7 @@
                 // // var host = new_uri + ":1222";
                 // // console.log(host);
 
-                var host = "wss://calm-scrubland-52770.herokuapp.com";
+                var host = "wss://whispering-lake-76428.herokuapp.com";
 
                 try{
                 socket = new WebSocket(host);
@@ -94,7 +94,8 @@
         $port = $data['port'];
 
         $mode = "subscribe";
-        $callback_url = $url.$port."/webhook.php";
+        // $callback_url = $url.$port."/webhook.php";
+        $callback_url = "https://whispering-lake-76428.herokuapp.com/webhook-callback";
         $target_user_id = $_GET['userId'];
         $lease_seconds = "864000";
 

@@ -44,7 +44,7 @@
                 // // var host = new_uri + ":1222";
                 // // console.log(host);
 
-                var host = "wss://mighty-cliffs-90474.herokuapp.com";
+                var host = "wss://vast-castle-74600.herokuapp.com";
 
                 try{
                 socket = new WebSocket(host);
@@ -95,7 +95,7 @@
 
         $mode = "subscribe";
         // $callback_url = $url.$port."/webhook.php";
-        $callback_url = "https://mighty-cliffs-90474.herokuapp.com/webhook-callback";
+        $callback_url = "https://vast-castle-74600.herokuapp.com/webhook-callback";
         $target_user_id = $_GET['userId'];
         $lease_seconds = "864000";
 

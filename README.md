@@ -19,11 +19,11 @@ Prerequisites
 - AWS CLI
 
 Deploy to AWS
-step1. Create ECR
-step2. Create CodeCommit Repo
-step3. Push Docker Image to ECR
-step4. Push Code to CodeCommit
-step5. Create ECS
+1. Create ECR
+2. Create CodeCommit Repo
+3. Push Docker Image to ECR
+4. Push Code to CodeCommit
+5. Create ECS
 
 ## How would you approach scaling this app?
 kubernetes

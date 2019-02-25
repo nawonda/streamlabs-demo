@@ -6,10 +6,9 @@ detail.php ---> streamer detail page + websocket client + webhook
 
 api.php ---> twitch api connection(followed, users, follows/channels)
 
-server.php ---> websoket server
-
 _access.txt ---> save client access token
 
+ps: websocket and webhook handler are in another node server
 
 
 ## How would you deploy the above on AWS? 

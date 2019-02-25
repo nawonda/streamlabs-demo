@@ -1,6 +1,6 @@
 # streamlabs-demo
 
-![alt text](http://immense-garden-26748.herokuapp.com/architecture.jpg)
+
 
 index.php ---> login page + user info page.
 

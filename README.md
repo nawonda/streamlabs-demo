@@ -26,5 +26,6 @@ Deploy to AWS
 5. Create ECS
 
 ## How would you approach scaling this app?
-kubernetes
+1. cache
+2. kubernetes
 
